@@ -15,7 +15,7 @@ const signup = catchAsync(async (req, res) => {
     res.status(201).json({
       status: 'success',
       data: newUser,
-    });
+    });        
   }
 );
 
@@ -23,7 +23,7 @@ const login = catchAsync(async(req, res, next) => {
 
   const {email, password} = req.body;
   if(!email || !password) {
-    return next(new AppError('place provide email and password, 400'))
+    return next(new AppError('place provide email and password'))
   }
 
   const user = await User.findOne({ email})
