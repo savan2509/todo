@@ -11,14 +11,18 @@ const createTodo = catchAsync(async(req, res,) => {
 })
  
 const updateTodo = catchAsync(async (req, res) => {
-    const todoId = req.params.todoID;
-    const value = req.body.Status
-        const updateTodo = await Todo.findByIdAndUpdate(todoId, { Status: value }, { new: true});
-         res.status(200).json({
-            status: 'success',
-            data: updateTodo, 
-          });    
-  });
+  console.log(1);
+  const todoId = req.params.todoID;
+  console.log(2);
+  const value = req.body.Status;
+  console.log(3);
+      const updateTodo = await Todo.findByIdAndUpdate(todoId, { Status: value }, { new: true});
+      console.log(4);
+       res.status(200).json({
+          status: 'success',
+          data: updateTodo, 
+        });    
+});
   
 const deleteTodo = catchAsync(async (req, res) => {
     await Todo.findByIdAndDelete(req.params.todoId);

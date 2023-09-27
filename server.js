@@ -2,19 +2,16 @@ const app = require('./app');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 
-const port = process.env.port || 7000;
+
 
 dotenv.config({ path: './config.env'});
 
-mongoose.connect("mongodb://127.0.0.1:27017/newproject", {
-    useNewUrlParser:true,
-    useUnifiedTopology:true,
-}).then(() => {
-    console.log("connection successful");
-}).catch((e) => {
-    console.log("No connection", e);
-})
+const DB = process.env.DATABASE_LOCAL
+mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => console.log("The DB is Connected"))
+    .catch((error) => console.log("Connection Failed", error.message));
+const port = process.env.port || 7000;
 
 app.listen(port, () => {
-    console.log(`Server running `)
+    console.log(`Server running ${port}`)
 });
