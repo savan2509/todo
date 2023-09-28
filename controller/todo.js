@@ -2,23 +2,22 @@ const Todo = require('../model/todomodel');
 const catchAsync = require('../utils/catchAsync');
 
 const createTodo = catchAsync(async(req, res,) => {
+  const userID = req.params.userID
   const value ={name:req.body.name, status:req.body.status}
+  console.log(value);
+
     const newTodo = await Todo.create(value);
     res.status(201).json({
         status: 'success',
-        data: newTodo
+        data: {newTodo,userID}
       });
 })
- 
+
 const updateTodo = catchAsync(async (req, res) => {
-  console.log(1);
   const todoId = req.params.todoID;
-  console.log(2);
   const value = req.body.Status;
-  console.log(3);
       const updateTodo = await Todo.findByIdAndUpdate(todoId, { Status: value }, { new: true});
-      console.log(4);
-       res.status(200).json({
+      res.status(200).json({
           status: 'success',
           data: updateTodo, 
         });    
@@ -32,8 +31,26 @@ const deleteTodo = catchAsync(async (req, res) => {
     });
   });
 
+  const Me = catchAsync(async(req, res) => {
+    const todo = await Todo.findOne({ user: req.params._id });
+    res.status(200).json({
+      Status: 'Success',
+      data: todo
+    });
+  });
+
+  const oneTodo = catchAsync(async (req, res) => {
+    const oneTodo = await Todo.findById(req.params.todoID);
+    res.status(200).json({
+      status: 'success',
+      data: oneTodo
+    });
+  });
+  
 module.exports = {
     createTodo,
     updateTodo,
-    deleteTodo
+    deleteTodo,
+    oneTodo,
+    Me
 }
