@@ -6,11 +6,11 @@ const Todo = require('../controller/todo');
 const authController  = require('../controller/authController');
 
 
-router.post('/createTodo/:userID', authController.protect, Todo.createTodo);
+router.get('/ME', authController.protect, Todo.Me);
+router.post('/createTodo', authController.protect, Todo.createTodo);
 router.patch('/:todoID', authController.protect, Todo.updateTodo);
 router.delete('/:todoID', authController.protect, Todo.deleteTodo);
 
-router.get('/:todoID', Todo.oneTodo);
 
 
 module.exports = router;

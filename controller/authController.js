@@ -30,6 +30,7 @@ const login = catchAsync(async(req, res, next) => {
   if (!user) {
     return next(new AppError('Invalid email or password!', 401));
   }
+  console.log(user);
   const isPasswordCorrect = await bcrypt.compare(password, user.password);
   if (!isPasswordCorrect) {
     return next(new AppError('Invalid email or password!', 401));
@@ -72,7 +73,7 @@ const protect = catchAsync(async (req, res, next) => {
       )
     );
   }
-
+console.log(1);
   req.user = currentUser;
   next();
 });

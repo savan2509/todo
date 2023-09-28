@@ -10,6 +10,9 @@ const Todo = new mongoose.Schema({
       enum: ['pending','completed'],
       default: 'pending'
     },
+    userID: {
+      type : String ,
+    }
     });
 
 

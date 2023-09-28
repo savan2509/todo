@@ -1,0 +1,17 @@
+const deleteTodo = catchAsync(async (req, res) => {
+    // await Todo.findByIdAndDelete(req.params.todoId);
+    // console.log(req.user._id);
+    // if(req.params.todoId=== req.user){
+    // }
+    // res.status(403).send('Not authorized to perform this action');
+  console.log(req.userID);
+    if(req.params.todoId == req.user._ID){
+      await Todo.findByIdAndDelete(req.params.todoId);
+    }else if(req.params.todoId != req.user){
+      res.status(500).send("You are not allowed");
+    }
+    res.status(200).json({
+      status: 'success',
+      message: 'Data Delete successful',
+    });
+  });
