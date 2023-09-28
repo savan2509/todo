@@ -12,12 +12,12 @@ const createTodo = catchAsync(async(req, res,) => {
         data: {newTodo,userID}
       });
 })
-
+ 
 const updateTodo = catchAsync(async (req, res) => {
   const todoId = req.params.todoID;
   const value = req.body.Status;
       const updateTodo = await Todo.findByIdAndUpdate(todoId, { Status: value }, { new: true});
-      res.status(200).json({
+       res.status(200).json({
           status: 'success',
           data: updateTodo, 
         });    
@@ -28,14 +28,6 @@ const deleteTodo = catchAsync(async (req, res) => {
     res.status(200).json({
       status: 'success',
       message: 'Data Delete successful',
-    });
-  });
-
-  const Me = catchAsync(async(req, res) => {
-    const todo = await Todo.findOne({ user: req.params._id });
-    res.status(200).json({
-      Status: 'Success',
-      data: todo
     });
   });
 
@@ -52,5 +44,4 @@ module.exports = {
     updateTodo,
     deleteTodo,
     oneTodo,
-    Me
 }
